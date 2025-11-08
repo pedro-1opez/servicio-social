@@ -1,28 +1,4 @@
-<Activity mc:Ignorable="sap2010" x:Class="Main" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <x:Members>
-    <x:Property Name="UiPathEventConnector" Type="InArgument(x:String)" />
-    <x:Property Name="UiPathEvent" Type="InArgument(x:String)" />
-    <x:Property Name="UiPathEventObjectType" Type="InArgument(x:String)" />
-    <x:Property Name="UiPathEventObjectId" Type="InArgument(x:String)" />
-    <x:Property Name="UiPathAdditionalEventData" Type="InArgument(x:String)" />
-  </x:Members>
-  <this:Main.UiPathEventConnector>
-    <InArgument x:TypeArguments="x:String" />
-  </this:Main.UiPathEventConnector>
-  <this:Main.UiPathEvent>
-    <InArgument x:TypeArguments="x:String" />
-  </this:Main.UiPathEvent>
-  <this:Main.UiPathEventObjectType>
-    <InArgument x:TypeArguments="x:String" />
-  </this:Main.UiPathEventObjectType>
-  <this:Main.UiPathEventObjectId>
-    <InArgument x:TypeArguments="x:String" />
-  </this:Main.UiPathEventObjectId>
-  <this:Main.UiPathAdditionalEventData>
-    <InArgument x:TypeArguments="x:String" />
-  </this:Main.UiPathAdditionalEventData>
-  <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
-  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -241,22 +217,82 @@
       <AssemblyReference>System.Net.Sockets</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_10">
+  <sap:WorkflowViewStateService.ViewState>
+    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+      <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+      <x:Boolean x:Key="ShouldCollapseAll">False</x:Boolean>
+    </scg:Dictionary>
+  </sap:WorkflowViewStateService.ViewState>
+  <Sequence sap:VirtualizedContainerService.HintSize="744.6666666666666,976.6666666666666" sap2010:WorkflowViewState.IdRef="Sequence_10">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" Name="folderPath" />
-      <Variable x:TypeArguments="x:String" Name="templateFolderPath_DIR" />
-      <Variable x:TypeArguments="x:String" Default="C:\\Users\\peanl\\OneDrive\\Escritorio\\Sharepoint\\Plantillas\\IND.xlsx" Name="templateFolderPath_IND" />
-      <Variable x:TypeArguments="x:String" Default="C:\\Users\\peanl\\OneDrive\\Escritorio\\Sharepoint\\Plantillas\\MASTERFILE_BONO PRODUCTIVIDAD - (MES)" Name="templateFolderPath_MasterFile" />
+      <Variable x:TypeArguments="x:String" Default="C:\\Users\\peanl\\OneDrive\\Escritorio\\Sharepoint" Name="folderPath" />
+      <Variable x:TypeArguments="x:String" Name="templateFolderPath">
+        <Variable.Default>
+          <Literal x:TypeArguments="x:String">C:\\Users\\peanl\\OneDrive\\Escritorio\\Sharepoint\\Plantillas</Literal>
+        </Variable.Default>
+      </Variable>
     </Sequence.Variables>
-    <ui:ManualTrigger Result="{x:Null}" DisplayName="Manual Trigger to start the workflow." sap2010:WorkflowViewState.IdRef="ManualTrigger_1" />
-    <Sequence DisplayName="Variable Definitions" sap2010:WorkflowViewState.IdRef="Sequence_1" />
-    <Sequence DisplayName="SharePoint Folder Preparation" sap2010:WorkflowViewState.IdRef="Sequence_2" />
-    <Sequence DisplayName="Download Headcount Report" sap2010:WorkflowViewState.IdRef="Sequence_3" />
-    <Sequence DisplayName="Apply Eligibility Criteria" sap2010:WorkflowViewState.IdRef="Sequence_4" />
-    <Sequence DisplayName="Generate DIR and IND Files" sap2010:WorkflowViewState.IdRef="Sequence_5" />
-    <Sequence DisplayName="Notify Metrics Filling - Teams" sap2010:WorkflowViewState.IdRef="Sequence_6" />
-    <Sequence DisplayName="Wait (2 days)" sap2010:WorkflowViewState.IdRef="Sequence_7" />
-    <Sequence DisplayName="Review/Validate Files" sap2010:WorkflowViewState.IdRef="Sequence_8" />
-    <Sequence DisplayName="Assign Amounts to Employees" sap2010:WorkflowViewState.IdRef="Sequence_9" />
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Sequence DisplayName="Sharepoint" sap:VirtualizedContainerService.HintSize="484,954" sap2010:WorkflowViewState.IdRef="Sequence_11">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Crear carpeta del mes" sap:VirtualizedContainerService.HintSize="450,124" sap2010:WorkflowViewState.IdRef="CreateDirectory_1">
+        <ui:CreateDirectory.Path>
+          <InArgument x:TypeArguments="x:String">
+            <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_1">System.IO.Path.Combine(folderPath, "Octubre")</CSharpValue>
+          </InArgument>
+        </ui:CreateDirectory.Path>
+      </ui:CreateDirectory>
+      <Sequence DisplayName="Preparar archivos - Template" sap:VirtualizedContainerService.HintSize="450,747.3333333333334" sap2010:WorkflowViewState.IdRef="Sequence_12">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:CopyFile ContinueOnError="{x:Null}" DestinationResource="{x:Null}" PathResource="{x:Null}" DisplayName="MasterFile" sap:VirtualizedContainerService.HintSize="416,224.66666666666666" sap2010:WorkflowViewState.IdRef="CopyFile_1">
+          <ui:CopyFile.Destination>
+            <InArgument x:TypeArguments="x:String">
+              <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_9">System.IO.Path.Combine(folderPath, "Octubre")</CSharpValue>
+            </InArgument>
+          </ui:CopyFile.Destination>
+          <ui:CopyFile.Path>
+            <InArgument x:TypeArguments="x:String">
+              <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_18">System.IO.Path.Combine(templateFolderPath, "MASTERFILE_BONO PRODUCTIVIDAD - (MES).xlsx")</CSharpValue>
+            </InArgument>
+          </ui:CopyFile.Path>
+        </ui:CopyFile>
+        <ui:CopyFile ContinueOnError="{x:Null}" DestinationResource="{x:Null}" PathResource="{x:Null}" DisplayName="DIR" sap:VirtualizedContainerService.HintSize="416,224.66666666666666" sap2010:WorkflowViewState.IdRef="CopyFile_2">
+          <ui:CopyFile.Destination>
+            <InArgument x:TypeArguments="x:String">
+              <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_11">System.IO.Path.Combine(folderPath, "Octubre")</CSharpValue>
+            </InArgument>
+          </ui:CopyFile.Destination>
+          <ui:CopyFile.Path>
+            <InArgument x:TypeArguments="x:String">
+              <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_16">System.IO.Path.Combine(templateFolderPath, "DIR.xlsx")</CSharpValue>
+            </InArgument>
+          </ui:CopyFile.Path>
+        </ui:CopyFile>
+        <ui:CopyFile ContinueOnError="{x:Null}" DestinationResource="{x:Null}" PathResource="{x:Null}" DisplayName="IND" sap:VirtualizedContainerService.HintSize="416,215.33333333333334" sap2010:WorkflowViewState.IdRef="CopyFile_3">
+          <ui:CopyFile.Destination>
+            <InArgument x:TypeArguments="x:String">
+              <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_13">System.IO.Path.Combine(folderPath, "Octubre")</CSharpValue>
+            </InArgument>
+          </ui:CopyFile.Destination>
+          <ui:CopyFile.Path>
+            <InArgument x:TypeArguments="x:String">
+              <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_19">System.IO.Path.Combine(templateFolderPath, "IND.xlsx")</CSharpValue>
+            </InArgument>
+          </ui:CopyFile.Path>
+        </ui:CopyFile>
+      </Sequence>
+    </Sequence>
   </Sequence>
 </Activity>
