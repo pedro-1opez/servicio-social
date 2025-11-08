@@ -1,0 +1,6 @@
+{
+  "Name": "Tecate-Bot",
+  "ProjectType": "Process",
+  "Description": "Servicio Social",
+  "MainFile": "Main.xaml"
+}
