@@ -120,6 +120,7 @@
       <x:String>Microsoft.Office.Interop.Excel</x:String>
       <x:String>UiPath.MicrosoftOffice365.Excel.Contracts</x:String>
       <x:String>UiPath.MicrosoftOffice365.Activities.Sharepoint</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -242,7 +243,7 @@
       <x:Boolean x:Key="ShouldCollapseAll">False</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence sap:VirtualizedContainerService.HintSize="624,3943.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_10">
+  <Sequence sap:VirtualizedContainerService.HintSize="624,5392.666666666666" sap2010:WorkflowViewState.IdRef="Sequence_10">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="C:\\Users\\peanl\\OneDrive\\Escritorio\\Sharepoint" Name="folderPath" />
       <Variable x:TypeArguments="x:String" Default="C:\\Users\\peanl\\OneDrive\\Escritorio\\Sharepoint\\Plantillas" Name="templateFolderPath" />
@@ -251,30 +252,40 @@
       <Variable x:TypeArguments="sd:DataTable" Name="dtAcreedores" />
       <Variable x:TypeArguments="sd:DataTable" Name="dtNoAcreedores" />
       <Variable x:TypeArguments="sd:DataTable" Name="dtDatos" />
+      <Variable x:TypeArguments="ue:ISheetRef" Name="Acreedores_Sheet" />
+      <Variable x:TypeArguments="x:Object" Name="dtAcreedoresDirectos" />
+      <Variable x:TypeArguments="x:Object" Name="dtAcreedoresIndirectos" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence DisplayName="Sharepoint" sap:VirtualizedContainerService.HintSize="624,1270.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_11">
+    <Sequence DisplayName="Sharepoint" sap:VirtualizedContainerService.HintSize="624,57.333333333333336" sap2010:WorkflowViewState.IdRef="Sequence_11">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Crear carpeta del mes" sap:VirtualizedContainerService.HintSize="450,124" sap2010:WorkflowViewState.IdRef="CreateDirectory_1">
+      <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Crear carpeta del mes" sap:VirtualizedContainerService.HintSize="450,57.333333333333336" sap2010:WorkflowViewState.IdRef="CreateDirectory_1">
         <ui:CreateDirectory.Path>
           <InArgument x:TypeArguments="x:String">
             <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_1">System.IO.Path.Combine(folderPath, "Octubre")</CSharpValue>
           </InArgument>
         </ui:CreateDirectory.Path>
-      </ui:CreateDirectory>
-      <Sequence DisplayName="Preparar archivos - Template" sap:VirtualizedContainerService.HintSize="450,756.6666666666666" sap2010:WorkflowViewState.IdRef="Sequence_12">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:CreateDirectory>
+      <Sequence DisplayName="Preparar archivos - Template" sap:VirtualizedContainerService.HintSize="450,724.6666666666666" sap2010:WorkflowViewState.IdRef="Sequence_12">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
         <ui:CopyFile ContinueOnError="{x:Null}" DestinationResource="{x:Null}" PathResource="{x:Null}" DisplayName="MasterFile" sap:VirtualizedContainerService.HintSize="416,224.66666666666666" sap2010:WorkflowViewState.IdRef="CopyFile_1">
@@ -314,10 +325,11 @@
           </ui:CopyFile.Path>
         </ui:CopyFile>
       </Sequence>
-      <Sequence DisplayName="Descargar HeadCount" sap:VirtualizedContainerService.HintSize="450,298" sap2010:WorkflowViewState.IdRef="Sequence_15">
+      <Sequence DisplayName="Descargar HeadCount" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="Sequence_15">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
         <ui:CopyFile ContinueOnError="{x:Null}" DestinationResource="{x:Null}" PathResource="{x:Null}" DisplayName="HeadCount" sap:VirtualizedContainerService.HintSize="416,215.33333333333334" sap2010:WorkflowViewState.IdRef="CopyFile_4">
@@ -334,32 +346,34 @@
         </ui:CopyFile>
       </Sequence>
     </Sequence>
-    <Sequence DisplayName="Aplicar criterios de Eligibilidad" sap:VirtualizedContainerService.HintSize="624,2650" sap2010:WorkflowViewState.IdRef="Sequence_14">
+    <Sequence DisplayName="Aplicar criterios de Eligibilidad" sap:VirtualizedContainerService.HintSize="624,4062" sap2010:WorkflowViewState.IdRef="Sequence_14">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ueab:ExcelApplicationCard Password="{x:Null}" ReadFormatting="{x:Null}" SensitivityLabel="{x:Null}" CreateNewFile="False" DisplayName="Abrir HeadCount" sap:VirtualizedContainerService.HintSize="590,2567.3333333333335" sap2010:WorkflowViewState.IdRef="ExcelApplicationCard_1" ResizeWindow="None" SensitivityOperation="None">
+      <ueab:ExcelApplicationCard Password="{x:Null}" ReadFormatting="{x:Null}" SensitivityLabel="{x:Null}" CreateNewFile="False" DisplayName="Abrir archivo &quot;HeadCount&quot;" sap:VirtualizedContainerService.HintSize="590,3970" sap2010:WorkflowViewState.IdRef="ExcelApplicationCard_1" ResizeWindow="None" SensitivityOperation="None">
         <ueab:ExcelApplicationCard.Body>
           <ActivityAction x:TypeArguments="ue:IWorkbookQuickHandle">
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="ue:IWorkbookQuickHandle" Name="Excel" />
             </ActivityAction.Argument>
-            <Sequence DisplayName="Filtrar empleados" sap:VirtualizedContainerService.HintSize="556,2264" sap2010:WorkflowViewState.IdRef="Sequence_1">
+            <Sequence DisplayName="Filtrar empleados" sap:VirtualizedContainerService.HintSize="556,3666.6666666666665" sap2010:WorkflowViewState.IdRef="Sequence_1">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <Sequence DisplayName="Organizar archivo en hojas" sap:VirtualizedContainerService.HintSize="522,254.66666666666666" sap2010:WorkflowViewState.IdRef="Sequence_18">
+              <Sequence DisplayName="Organizar archivo en hojas" sap:VirtualizedContainerService.HintSize="522,57.333333333333336" sap2010:WorkflowViewState.IdRef="Sequence_18">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <Sequence DisplayName="Hoja de &quot;Todos&quot;" sap:VirtualizedContainerService.HintSize="450,57.333333333333336" sap2010:WorkflowViewState.IdRef="Sequence_34">
+                <Sequence DisplayName="Hoja de &quot;Todos&quot;" sap:VirtualizedContainerService.HintSize="468,57.333333333333336" sap2010:WorkflowViewState.IdRef="Sequence_34">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -380,14 +394,11 @@
                     </sap:WorkflowViewStateService.ViewState>
                   </ueab:RenameSheetX>
                 </Sequence>
-                <Sequence DisplayName="Hoja de &quot;Acreedores&quot;" sap:VirtualizedContainerService.HintSize="450,57.333333333333336" sap2010:WorkflowViewState.IdRef="Sequence_33">
-                  <Sequence.Variables>
-                    <Variable x:TypeArguments="ue:ISheetRef" Name="Acreedores_Sheet" />
-                  </Sequence.Variables>
+                <Sequence DisplayName="Hoja de &quot;Acreedores&quot;" sap:VirtualizedContainerService.HintSize="468,584" sap2010:WorkflowViewState.IdRef="Sequence_33">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                      <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                   <ueab:InsertSheetX DisplayName="Crear hoja &quot;Acreedores&quot;" sap:VirtualizedContainerService.HintSize="434,222.66666666666666" sap2010:WorkflowViewState.IdRef="InsertSheetX_7" Name="Acreedores">
@@ -427,11 +438,11 @@
                     </sap:WorkflowViewStateService.ViewState>
                   </ueab:CopyPasteRangeX>
                 </Sequence>
-                <Sequence DisplayName="Hoja de &quot;No Acreedores&quot;" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                <Sequence DisplayName="Hoja de &quot;No Acreedores&quot;" sap:VirtualizedContainerService.HintSize="468,574.6666666666666" sap2010:WorkflowViewState.IdRef="Sequence_22">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                      <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                   <ueab:InsertSheetX DisplayName="Crear hoja &quot;No Acreedores&quot;" sap:VirtualizedContainerService.HintSize="434,222.66666666666666" sap2010:WorkflowViewState.IdRef="InsertSheetX_5" Name="No Acreedores">
@@ -472,49 +483,57 @@
                   </ueab:CopyPasteRangeX>
                 </Sequence>
               </Sequence>
-              <Sequence DisplayName="Aplicar criterios" sap:VirtualizedContainerService.HintSize="522,1949.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_23">
+              <Sequence DisplayName="Aplicar criterios" sap:VirtualizedContainerService.HintSize="522,3549.3333333333335" sap2010:WorkflowViewState.IdRef="Sequence_23">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ueab:ReadRangeX DisplayName="Leer la hoja de &quot;Todos&quot;" sap:VirtualizedContainerService.HintSize="488,206.66666666666666" sap2010:WorkflowViewState.IdRef="ReadRangeX_2">
-                  <ueab:ReadRangeX.Range>
-                    <InArgument x:TypeArguments="ue:IReadRangeRef">
-                      <CSharpValue x:TypeArguments="ue:IReadRangeRef" sap2010:WorkflowViewState.IdRef="CSharpValue`1_40">Excel.Sheet["Todos"].Range[""]</CSharpValue>
-                    </InArgument>
-                  </ueab:ReadRangeX.Range>
-                  <ueab:ReadRangeX.SaveTo>
-                    <OutArgument x:TypeArguments="sd:DataTable">
-                      <CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_5">dtDatos</CSharpReference>
-                    </OutArgument>
-                  </ueab:ReadRangeX.SaveTo>
-                </ueab:ReadRangeX>
-                <Assign sap:VirtualizedContainerService.HintSize="488,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_4">
-                  <Assign.To>
-                    <OutArgument x:TypeArguments="sd:DataTable">
-                      <CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_12">dtNoAcreedores</CSharpReference>
-                    </OutArgument>
-                  </Assign.To>
-                  <Assign.Value>
-                    <InArgument x:TypeArguments="sd:DataTable">
-                      <CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_43">dtDatos.Clone()</CSharpValue>
-                    </InArgument>
-                  </Assign.Value>
-                </Assign>
-                <Assign sap:VirtualizedContainerService.HintSize="488,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_6">
-                  <Assign.To>
-                    <OutArgument x:TypeArguments="sd:DataTable">
-                      <CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_13">dtAcreedores</CSharpReference>
-                    </OutArgument>
-                  </Assign.To>
-                  <Assign.Value>
-                    <InArgument x:TypeArguments="sd:DataTable">
-                      <CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_73">dtDatos.Clone()</CSharpValue>
-                    </InArgument>
-                  </Assign.Value>
-                </Assign>
-                <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="488,922.6666666666666" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
+                <Sequence DisplayName="Leer informacion de &quot;Todos&quot;" sap:VirtualizedContainerService.HintSize="488,642.6666666666666" sap2010:WorkflowViewState.IdRef="Sequence_35">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ueab:ReadRangeX DisplayName="Leer la hoja" sap:VirtualizedContainerService.HintSize="444,206.66666666666666" sap2010:WorkflowViewState.IdRef="ReadRangeX_2">
+                    <ueab:ReadRangeX.Range>
+                      <InArgument x:TypeArguments="ue:IReadRangeRef">
+                        <CSharpValue x:TypeArguments="ue:IReadRangeRef" sap2010:WorkflowViewState.IdRef="CSharpValue`1_40">Excel.Sheet["Todos"].Range[""]</CSharpValue>
+                      </InArgument>
+                    </ueab:ReadRangeX.Range>
+                    <ueab:ReadRangeX.SaveTo>
+                      <OutArgument x:TypeArguments="sd:DataTable">
+                        <CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_5">dtDatos</CSharpReference>
+                      </OutArgument>
+                    </ueab:ReadRangeX.SaveTo>
+                  </ueab:ReadRangeX>
+                  <Assign sap:VirtualizedContainerService.HintSize="444,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_4">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="sd:DataTable">
+                        <CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_12">dtNoAcreedores</CSharpReference>
+                      </OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="sd:DataTable">
+                        <CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_43">dtDatos.Clone()</CSharpValue>
+                      </InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign sap:VirtualizedContainerService.HintSize="444,167.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_6">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="sd:DataTable">
+                        <CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_13">dtAcreedores</CSharpReference>
+                      </OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="sd:DataTable">
+                        <CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_73">dtDatos.Clone()</CSharpValue>
+                      </InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+                <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DisplayName="Por cada registro en la hoja &quot;Todos&quot;" sap:VirtualizedContainerService.HintSize="488,922.6666666666666" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
                   <ui:ForEachRow.Body>
                     <ActivityAction x:TypeArguments="sd:DataRow">
                       <ActivityAction.Argument>
@@ -526,7 +545,7 @@
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <If sap:VirtualizedContainerService.HintSize="452,678.6666666666666" sap2010:WorkflowViewState.IdRef="If_4">
+                        <If DisplayName="Si el empleado es elegible para bono" sap:VirtualizedContainerService.HintSize="452,678.6666666666666" sap2010:WorkflowViewState.IdRef="If_4">
                           <If.Condition>
                             <InArgument x:TypeArguments="x:Boolean">
                               <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_68" xml:space="preserve">!(
@@ -539,13 +558,13 @@
                             </InArgument>
                           </If.Condition>
                           <If.Then>
-                            <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="450,274" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                            <Sequence DisplayName="Se registra en la variable dtAcreedores" sap:VirtualizedContainerService.HintSize="450,274" sap2010:WorkflowViewState.IdRef="Sequence_30">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <ui:AddDataRow DataRow="{x:Null}" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="416,214" sap2010:WorkflowViewState.IdRef="AddDataRow_3">
+                              <ui:AddDataRow DataRow="{x:Null}" DisplayName="Registrar empleado" sap:VirtualizedContainerService.HintSize="416,214" sap2010:WorkflowViewState.IdRef="AddDataRow_3">
                                 <ui:AddDataRow.ArrayRow>
                                   <InArgument x:TypeArguments="s:Object[]">
                                     <CSharpValue x:TypeArguments="s:Object[]" sap2010:WorkflowViewState.IdRef="CSharpValue`1_74">CurrentRow.ItemArray</CSharpValue>
@@ -560,13 +579,13 @@
                             </Sequence>
                           </If.Then>
                           <If.Else>
-                            <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="450,274" sap2010:WorkflowViewState.IdRef="Sequence_31">
+                            <Sequence DisplayName="Sino se registra en la variable dtNoAcreedores" sap:VirtualizedContainerService.HintSize="450,274" sap2010:WorkflowViewState.IdRef="Sequence_31">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <ui:AddDataRow DataRow="{x:Null}" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="416,214" sap2010:WorkflowViewState.IdRef="AddDataRow_2">
+                              <ui:AddDataRow DataRow="{x:Null}" DisplayName="Registrar empleado" sap:VirtualizedContainerService.HintSize="416,214" sap2010:WorkflowViewState.IdRef="AddDataRow_2">
                                 <ui:AddDataRow.ArrayRow>
                                   <InArgument x:TypeArguments="s:Object[]">
                                     <CSharpValue x:TypeArguments="s:Object[]" sap2010:WorkflowViewState.IdRef="CSharpValue`1_51">CurrentRow.ItemArray</CSharpValue>
@@ -589,41 +608,245 @@
                       <CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_49">dtDatos</CSharpValue>
                     </InArgument>
                   </ui:ForEachRow.DataTable>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
                 </ui:ForEachRow>
-                <ueab:WriteRangeX Append="True" DisplayName="Write DataTable to Excel" ExcludeHeaders="True" sap:VirtualizedContainerService.HintSize="488,196.66666666666666" sap2010:WorkflowViewState.IdRef="WriteRangeX_2" IgnoreEmptySource="False">
-                  <ueab:WriteRangeX.Destination>
-                    <InArgument x:TypeArguments="ue:IReadWriteRangeRef">
-                      <CSharpValue x:TypeArguments="ue:IReadWriteRangeRef" sap2010:WorkflowViewState.IdRef="CSharpValue`1_78">Excel.Sheet["Acreedores"].Range["A1:L1"]</CSharpValue>
-                    </InArgument>
-                  </ueab:WriteRangeX.Destination>
-                  <ueab:WriteRangeX.Source>
-                    <InArgument x:TypeArguments="sd:DataTable">
-                      <CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_77">dtAcreedores</CSharpValue>
-                    </InArgument>
-                  </ueab:WriteRangeX.Source>
-                </ueab:WriteRangeX>
-                <ueab:WriteRangeX Append="True" DisplayName="Write DataTable to Excel" ExcludeHeaders="True" sap:VirtualizedContainerService.HintSize="488,187.33333333333334" sap2010:WorkflowViewState.IdRef="WriteRangeX_1" IgnoreEmptySource="False">
-                  <ueab:WriteRangeX.Destination>
-                    <InArgument x:TypeArguments="ue:IReadWriteRangeRef">
-                      <CSharpValue x:TypeArguments="ue:IReadWriteRangeRef" sap2010:WorkflowViewState.IdRef="CSharpValue`1_67">Excel.Sheet["No Acreedores"].Range["A1:L1"]</CSharpValue>
-                    </InArgument>
-                  </ueab:WriteRangeX.Destination>
-                  <ueab:WriteRangeX.Source>
-                    <InArgument x:TypeArguments="sd:DataTable">
-                      <CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_66">dtNoAcreedores</CSharpValue>
-                    </InArgument>
-                  </ueab:WriteRangeX.Source>
-                </ueab:WriteRangeX>
+                <Sequence DisplayName="Capturar empleados en hoja &quot;Acreedores&quot;" sap:VirtualizedContainerService.HintSize="488,955.3333333333334" sap2010:WorkflowViewState.IdRef="Sequence_38">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ueab:WriteRangeX Append="True" DisplayName="Capturar informacion" ExcludeHeaders="True" sap:VirtualizedContainerService.HintSize="434,196.66666666666666" sap2010:WorkflowViewState.IdRef="WriteRangeX_2" IgnoreEmptySource="False">
+                    <ueab:WriteRangeX.Destination>
+                      <InArgument x:TypeArguments="ue:IReadWriteRangeRef">
+                        <CSharpValue x:TypeArguments="ue:IReadWriteRangeRef" sap2010:WorkflowViewState.IdRef="CSharpValue`1_78">Excel.Sheet["Acreedores"].Range["A1:L1"]</CSharpValue>
+                      </InArgument>
+                    </ueab:WriteRangeX.Destination>
+                    <ueab:WriteRangeX.Source>
+                      <InArgument x:TypeArguments="sd:DataTable">
+                        <CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_77">dtAcreedores</CSharpValue>
+                      </InArgument>
+                    </ueab:WriteRangeX.Source>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ueab:WriteRangeX>
+                  <ueab:SortX DisplayName="Ordenar informacion" HasHeaders="True" sap:VirtualizedContainerService.HintSize="434,322.6666666666667" sap2010:WorkflowViewState.IdRef="SortX_1">
+                    <ueab:SortX.Body>
+                      <ActivityAction>
+                        <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_40">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ueab:SortColumnX ColumnName="Desc Claisifi" DisplayName="Order por Clasificacion" sap:VirtualizedContainerService.HintSize="382,74" sap2010:WorkflowViewState.IdRef="SortColumnX_1" SortDirection="Ascending" />
+                          <ueab:SortColumnX ColumnName="Puesto" DisplayName="Order por Puesto" sap:VirtualizedContainerService.HintSize="382,74" sap2010:WorkflowViewState.IdRef="SortColumnX_2" SortDirection="Ascending" />
+                        </Sequence>
+                      </ActivityAction>
+                    </ueab:SortX.Body>
+                    <ueab:SortX.Range>
+                      <InArgument x:TypeArguments="ue:IReadWriteRangeRef">
+                        <CSharpValue x:TypeArguments="ue:IReadWriteRangeRef" sap2010:WorkflowViewState.IdRef="CSharpValue`1_79">Excel.Sheet["Acreedores"]</CSharpValue>
+                      </InArgument>
+                    </ueab:SortX.Range>
+                  </ueab:SortX>
+                  <Assign sap:VirtualizedContainerService.HintSize="434,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_8">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Object">
+                        <CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_22">dtAcreedoresDirectos</CSharpReference>
+                      </OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Object">
+                        <CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_101" xml:space="preserve">dtAcreedores.AsEnumerable()
+    .Where(r =&gt; r.Field&lt;string&gt;("Desc Claisifi").Trim() == "DIRECTO")
+    .CopyToDataTable()
+    .DefaultView
+    .ToTable(false, "Número", "Nombre", "Puesto")</CSharpValue>
+                      </InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info">
+                    <ui:LogMessage.Message>
+                      <InArgument x:TypeArguments="x:Object">
+                        <CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_99">dtAcreedoresDirectos</CSharpValue>
+                      </InArgument>
+                    </ui:LogMessage.Message>
+                  </ui:LogMessage>
+                </Sequence>
+                <Sequence DisplayName="Capturar empleados en hoja &quot;No Acreedores&quot;" sap:VirtualizedContainerService.HintSize="488,946" sap2010:WorkflowViewState.IdRef="Sequence_39">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ueab:WriteRangeX Append="True" DisplayName="Capturar informacion" ExcludeHeaders="True" sap:VirtualizedContainerService.HintSize="434,196.66666666666666" sap2010:WorkflowViewState.IdRef="WriteRangeX_1" IgnoreEmptySource="False">
+                    <ueab:WriteRangeX.Destination>
+                      <InArgument x:TypeArguments="ue:IReadWriteRangeRef">
+                        <CSharpValue x:TypeArguments="ue:IReadWriteRangeRef" sap2010:WorkflowViewState.IdRef="CSharpValue`1_67">Excel.Sheet["No Acreedores"].Range["A1:L1"]</CSharpValue>
+                      </InArgument>
+                    </ueab:WriteRangeX.Destination>
+                    <ueab:WriteRangeX.Source>
+                      <InArgument x:TypeArguments="sd:DataTable">
+                        <CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_66">dtNoAcreedores</CSharpValue>
+                      </InArgument>
+                    </ueab:WriteRangeX.Source>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ueab:WriteRangeX>
+                  <ueab:SortX DisplayName="Ordenar informacion" HasHeaders="True" sap:VirtualizedContainerService.HintSize="434,322.6666666666667" sap2010:WorkflowViewState.IdRef="SortX_2">
+                    <ueab:SortX.Body>
+                      <ActivityAction>
+                        <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_41">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ueab:SortColumnX ColumnName="Desc Claisifi" DisplayName="Order por Clasificacion" sap:VirtualizedContainerService.HintSize="382,74" sap2010:WorkflowViewState.IdRef="SortColumnX_3" SortDirection="Ascending" />
+                          <ueab:SortColumnX ColumnName="Puesto" DisplayName="Order por Puesto" sap:VirtualizedContainerService.HintSize="382,74" sap2010:WorkflowViewState.IdRef="SortColumnX_4" SortDirection="Ascending" />
+                        </Sequence>
+                      </ActivityAction>
+                    </ueab:SortX.Body>
+                    <ueab:SortX.Range>
+                      <InArgument x:TypeArguments="ue:IReadWriteRangeRef">
+                        <CSharpValue x:TypeArguments="ue:IReadWriteRangeRef" sap2010:WorkflowViewState.IdRef="CSharpValue`1_80">Excel.Sheet["No Acreedores"]</CSharpValue>
+                      </InArgument>
+                    </ueab:SortX.Range>
+                  </ueab:SortX>
+                  <Assign sap:VirtualizedContainerService.HintSize="434,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_9">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Object">
+                        <CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_23">dtAcreedoresIndirectos</CSharpReference>
+                      </OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Object">
+                        <CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_100" xml:space="preserve">dtAcreedores.AsEnumerable()
+    .Where(r =&gt; r.Field&lt;string&gt;("Desc Claisifi").Trim() == "INDIRECTO")
+    .CopyToDataTable()
+    .DefaultView
+    .ToTable(false, "Número", "Nombre", "Puesto")</CSharpValue>
+                      </InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info">
+                    <ui:LogMessage.Message>
+                      <InArgument x:TypeArguments="x:Object">
+                        <CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_98">dtAcreedoresIndirectos</CSharpValue>
+                      </InArgument>
+                    </ui:LogMessage.Message>
+                  </ui:LogMessage>
+                </Sequence>
               </Sequence>
             </Sequence>
           </ActivityAction>
         </ueab:ExcelApplicationCard.Body>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
         <ueab:ExcelApplicationCard.WorkbookPath>
           <InArgument x:TypeArguments="x:String">
             <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_20">headCountPath</CSharpValue>
           </InArgument>
         </ueab:ExcelApplicationCard.WorkbookPath>
       </ueab:ExcelApplicationCard>
+    </Sequence>
+    <Sequence DisplayName="Generar archivos DIR e IND" sap:VirtualizedContainerService.HintSize="624,1202.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_36">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ueab:ExcelApplicationCard Password="{x:Null}" ReadFormatting="{x:Null}" SensitivityLabel="{x:Null}" CreateNewFile="False" DisplayName="Abrir archivo &quot;DIR&quot;" sap:VirtualizedContainerService.HintSize="502,560" sap2010:WorkflowViewState.IdRef="ExcelApplicationCard_3" ResizeWindow="None" SensitivityOperation="None" WorkbookPath="C:\\Users\\peanl\\OneDrive\\Escritorio\\Sharepoint\\Octubre\\DIR.xlsx">
+        <ueab:ExcelApplicationCard.Body>
+          <ActivityAction x:TypeArguments="ue:IWorkbookQuickHandle">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="ue:IWorkbookQuickHandle" Name="Excel" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="468,247.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_42">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ueab:WriteRangeX Append="True" DisplayName="Capturar informacion" ExcludeHeaders="True" sap:VirtualizedContainerService.HintSize="434,187.33333333333334" sap2010:WorkflowViewState.IdRef="WriteRangeX_3" IgnoreEmptySource="False">
+                <ueab:WriteRangeX.Destination>
+                  <InArgument x:TypeArguments="ue:IReadWriteRangeRef">
+                    <CSharpValue x:TypeArguments="ue:IReadWriteRangeRef" sap2010:WorkflowViewState.IdRef="CSharpValue`1_103">Excel.Sheet["Asistencia Directos"].Range["A2:C2"]</CSharpValue>
+                  </InArgument>
+                </ueab:WriteRangeX.Destination>
+                <ueab:WriteRangeX.Source>
+                  <InArgument x:TypeArguments="sd:DataTable">
+                    <CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_102">(System.Data.DataTable)dtAcreedoresDirectos</CSharpValue>
+                  </InArgument>
+                </ueab:WriteRangeX.Source>
+              </ueab:WriteRangeX>
+            </Sequence>
+          </ActivityAction>
+        </ueab:ExcelApplicationCard.Body>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ueab:ExcelApplicationCard>
+      <ueab:ExcelApplicationCard Password="{x:Null}" ReadFormatting="{x:Null}" SensitivityLabel="{x:Null}" CreateNewFile="False" DisplayName="Abrir archivo &quot;IND&quot;" sap:VirtualizedContainerService.HintSize="502,550.6666666666666" sap2010:WorkflowViewState.IdRef="ExcelApplicationCard_5" ResizeWindow="None" SensitivityOperation="None" WorkbookPath="C:\\Users\\peanl\\OneDrive\\Escritorio\\Sharepoint\\Octubre\\IND.xlsx">
+        <ueab:ExcelApplicationCard.Body>
+          <ActivityAction x:TypeArguments="ue:IWorkbookQuickHandle">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="ue:IWorkbookQuickHandle" Name="Excel" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="468,247.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_44">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ueab:WriteRangeX Append="True" DisplayName="Write DataTable to Excel" ExcludeHeaders="True" sap:VirtualizedContainerService.HintSize="434,187.33333333333334" sap2010:WorkflowViewState.IdRef="WriteRangeX_8" IgnoreEmptySource="False">
+                <ueab:WriteRangeX.Destination>
+                  <InArgument x:TypeArguments="ue:IReadWriteRangeRef">
+                    <CSharpValue x:TypeArguments="ue:IReadWriteRangeRef" sap2010:WorkflowViewState.IdRef="CSharpValue`1_112">Excel.Sheet["Asistencia Indirectos"].Range["A2:B2"]</CSharpValue>
+                  </InArgument>
+                </ueab:WriteRangeX.Destination>
+                <ueab:WriteRangeX.Source>
+                  <InArgument x:TypeArguments="sd:DataTable">
+                    <CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_108">(System.Data.DataTable)dtAcreedoresIndirectos</CSharpValue>
+                  </InArgument>
+                </ueab:WriteRangeX.Source>
+              </ueab:WriteRangeX>
+            </Sequence>
+          </ActivityAction>
+        </ueab:ExcelApplicationCard.Body>
+      </ueab:ExcelApplicationCard>
+    </Sequence>
+    <Sequence DisplayName="Teams" sap:VirtualizedContainerService.HintSize="624,48" sap2010:WorkflowViewState.IdRef="Sequence_37">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </Sequence>
   </Sequence>
 </Activity>
